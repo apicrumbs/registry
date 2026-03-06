@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-05",
+  "providers": [
+    {
+      "id": "weather/open-meteo",
+      "name": "Open-Meteo",
+      "category": "Weather",
+      "tier": "core",
+      "capabilities": "Global Temp, Wind, Forecast",
+      "description": "Open-Meteo is an open-source, free-to-use weather API designed for non-commercial applications, providing high-resolution, real-time and historical weather data by aggregating data from national weather services. It requires no API key for basic use and offers extensive data, including 80 years of historical, 16-day forecasts, marine, and air quality data.",
+      "requires_key": false,
+      "url": "https://open-meteo.com",
+      "example_id": "51.5074,-0.1278"
+    },
+    {
+      "id": "geo/postcodes-io",
+      "name": "Postcodes.io",
+      "category": "Geo",
+      "tier": "core",
+      "capabilities": "UK Wards, GPS, NHS Regions",
+      "description": "Retrieve detailed information about a specific UK postcode, including latitude, longitude, and administrative areas.",
+      "requires_key": false,
+      "url": "https://postcodes.io",
+      "example_id": "SW1A 2AA",
+      "tags": ["uk", "geo", "logistics"],
+      "class": "ApiCrumbs\\Registry\\Providers\\Geo\\PostcodeProvider", 
+    }   
+  ]
+}
