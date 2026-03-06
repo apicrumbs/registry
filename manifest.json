@@ -22,9 +22,7 @@
       "description": "Retrieve detailed information about a specific UK postcode, including latitude, longitude, and administrative areas.",
       "requires_key": false,
       "url": "https://postcodes.io",
-      "example_id": "SW1A 2AA",
-      "tags": ["uk", "geo", "logistics"],
-      "class": "ApiCrumbs\\Registry\\Providers\\Geo\\PostcodeProvider", 
+      "example_id": "SW1A 2AA"
     }   
   ]
 }
