@@ -11,7 +11,8 @@
       "description": "Open-Meteo is an open-source, free-to-use weather API designed for non-commercial applications, providing high-resolution, real-time and historical weather data by aggregating data from national weather services. It requires no API key for basic use and offers extensive data, including 80 years of historical, 16-day forecasts, marine, and air quality data.",
       "requires_key": false,
       "url": "https://open-meteo.com",
-      "example_id": "51.5074,-0.1278"
+      "example_id": "51.5074,-0.1278",
+      "install_path": "src/Providers/Weather/OpenMeteoProvider.php",
     },
     {
       "id": "geo/postcodes-io",
@@ -22,7 +23,8 @@
       "description": "Retrieve detailed information about a specific UK postcode, including latitude, longitude, and administrative areas.",
       "requires_key": false,
       "url": "https://postcodes.io",
-      "example_id": "SW1A 2AA"
+      "example_id": "SW1A 2AA",
+      "install_path": "src/Providers/Geo/PostcodeProvider.php",
     }   
   ]
 }
