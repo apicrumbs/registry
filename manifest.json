@@ -12,7 +12,7 @@
       "requires_key": false,
       "url": "https://open-meteo.com",
       "example_id": "51.5074,-0.1278",
-      "install_path": "src/Providers/Weather/OpenMeteoProvider.php",
+      "install_path": "src/Providers/Weather/OpenMeteoProvider.php"
     },
     {
       "id": "geo/postcodes-io",
@@ -24,7 +24,7 @@
       "requires_key": false,
       "url": "https://postcodes.io",
       "example_id": "SW1A 2AA",
-      "install_path": "src/Providers/Geo/PostcodeProvider.php",
+      "install_path": "src/Providers/Geo/PostcodeProvider.php"
     }   
   ]
 }
