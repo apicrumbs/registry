@@ -22,9 +22,15 @@ class PostcodeProvider implements ProviderInterface
     {
         return 'uk_postcode_context';
     }
+    
+    public function getDependencies(): array 
+    { 
+        return []; 
+    }
 
-    public function fetchData(string $id): array
+    public function fetchData(string $id, array $context = []): array
     {
+   
         try {
             $response = $this->client->get("/postcodes/" . urlencode($id));
             $body = json_decode($response->getBody()->getContents(), true);

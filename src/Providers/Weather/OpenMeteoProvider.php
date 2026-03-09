@@ -26,11 +26,13 @@ class OpenMeteoProvider implements ProviderInterface
     {
         return 'local_weather_forecast';
     }
+    
+    public function getDependencies(): array 
+    { 
+        return []; 
+    }
 
-    /**
-     * @param string $id Format: "latitude,longitude"
-     */
-    public function fetchData(string $id): array
+    public function fetchData(string $id, array $context = []): array
     {
         if (!str_contains($id, ',')) return [];
 
