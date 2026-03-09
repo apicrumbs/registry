@@ -74,7 +74,15 @@ $buildLayout = function($urlPrefix, $title, $content, $meta = []) use ($sidebarH
 <body class="text-slate-300 flex">
     <!-- Sidebar -->
     <nav class="w-72 h-screen sticky top-0 border-r border-slate-900 p-8 overflow-y-auto bg-[#0d111d]">
-        <a href="{$urlPrefix}/" class="text-white font-black text-2xl mb-10 block italic tracking-tighter">ApiCrumbs<span class="text-blue-500">.</span></a>
+        <a href="{$urlPrefix}/" class="mb-10 block uppercase">
+            <div class="flex items-center space-x-2 text-xl font-bold tracking-tight">
+                <div class="bg-blue-600 p-1.5 rounded-lg shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/cookie.svg" class="w-6 h-6 text-white">
+                </div>
+                <span class="text-white">ApiCrumbs<span class="text-blue-500">.com</span></span>
+            </div>
+        </a>
+       
         <input type="text" id="cSearch" placeholder="Filter 250+ crumbs..." class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-xs mb-8 outline-none focus:ring-1 ring-blue-500">
         <div id="sLinks">$sidebarHtml</div>
     </nav>
@@ -164,7 +172,14 @@ foreach ($categories as $cat => $providers) {
 foreach ($manifest['providers'] as $p) {    
     $slug = str_replace('/', '-', $p['id']);
     $isPro = ($p['tier'] === 'pro');
-    $className = str_replace(' ', '', $p['name']) . "Provider";
+    $classNameParts = explode('.', $p['name']);
+    foreach ($classNameParts as &$classNamePart) {
+        $classNamePart = ucwords($classNamePart);
+    }
+    $className = implode('', $classNameParts);
+    $className = str_replace(' ', '', $className) . "Provider";
+    $className = str_replace('-', '', $className);
+    $className = str_replace('.', '', $className);
     $namespace = "ApiCrumbs\Providers\\" . str_replace(' ', '', $p['category']);
 
     $badge = $isPro ? 
@@ -182,7 +197,7 @@ foreach ($manifest['providers'] as $p) {
         <div class='bg-black border border-slate-800 p-8 rounded-2xl relative group'>
             <button onclick=\"copyToClipboard(this, 'cli-{$slug}')\" class='absolute top-4 right-4 text-[10px] font-black text-slate-500 hover:text-white uppercase tracking-widest transition'>Copy</button>
             <div class='text-blue-500 font-bold text-xs uppercase mb-4 tracking-widest'>CLI Installation</div>
-            <code id='cli-{$slug}' class='text-lg text-emerald-400 font-mono'>php foundry install {$p['id']}</code>
+            <code id='cli-{$slug}' class='text-lg text-sm text-emerald-400 font-mono'>php vendor/bin/foundry install {$p['id']}</code>
         </div>
         <div class='bg-slate-900/50 border border-slate-800 p-8 rounded-2xl'>
             <div class='text-slate-500 font-bold text-xs uppercase mb-4 tracking-widest'>Class Reference</div>
@@ -202,7 +217,7 @@ foreach ($manifest['providers'] as $p) {
 <code class='text-white'>\$crumbs = new ApiCrumbs();</code>
 <code class='text-white'>\$crumbs->registerProvider(new {$className}());</code>
 
-<code class='text-blue-300'>echo</code> <code class='text-white'>\$crumbs->build('{$p['example_id']}')->toMarkdown();</code></pre>
+<code class='text-blue-300'>echo</code> <code class='text-white'>\$crumbs->build('{$p['example_id']}');</code></pre>
         </div>
     </div>";
 
