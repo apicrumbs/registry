@@ -30,7 +30,9 @@ class PostcodeProvider implements ProviderInterface
 
     public function fetchData(string $id, array $context = []): array
     {
-   
+        // Make sure we remove any spaces first
+        $id = str_replace(' ', '', $id);
+        
         try {
             $response = $this->client->get("/postcodes/" . urlencode($id));
             $body = json_decode($response->getBody()->getContents(), true);
