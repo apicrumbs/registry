@@ -9,9 +9,10 @@ class PostcodeProvider implements ProviderInterface
 {
     private Client $client;
 
-    public function __construct(?Client $client = null)
+    public function __construct(?Client $client = null, $verify = false)
     {
         $this->client = $client ?? new Client([
+            'verify' => $verify ? $verify : false,
             'base_uri' => 'https://api.postcodes.io',
             'timeout'  => 2.0,
         ]);

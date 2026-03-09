@@ -13,9 +13,10 @@ class OpenMeteoProvider implements ProviderInterface
      * Constructor injection allows the Registry to pass 
      * a pre-configured Guzzle client during boot.
      */
-    public function __construct(?Client $client = null)
+    public function __construct(?Client $client = null, $verify = false)
     {
         $this->client = $client ?? new Client([
+            'verify' => $verify ? $verify : false,
             'base_uri' => 'https://api.open-meteo.com',
             'timeout'  => 3.0,
         ]);
