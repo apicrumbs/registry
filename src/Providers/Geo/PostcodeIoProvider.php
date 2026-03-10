@@ -16,7 +16,7 @@ class PostcodeIoProvider extends BaseProvider
      */
     protected int $delay = 34000;
 
-    public function getName(): string { return 'geo_context'; }
+    public function getName(): string { return 'postcode_io_context'; }
 
     public function getDependencies(): array { return []; }
 

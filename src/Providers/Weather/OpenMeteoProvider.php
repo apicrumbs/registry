@@ -16,7 +16,7 @@ class OpenMeteoProvider extends BaseProvider
      */
     protected int $delay = 1000000;
 
-    public function getName(): string { return 'weather_context'; }
+    public function getName(): string { return 'open_meteo_context'; }
 
     /** 
      * STITCHING: Requires coordinates from the Postcode anchor 
