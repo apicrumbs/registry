@@ -2,70 +2,74 @@
 
 namespace ApiCrumbs\Providers\Weather;
 
-use ApiCrumbs\Core\Contracts\ProviderInterface;
-use GuzzleHttp\Client;
+use ApiCrumbs\Core\Contracts\BaseProvider;
 
-class OpenMeteoProvider implements ProviderInterface
+/**
+ * OpenMeteoProvider - Hyper-local Weather Context
+ * Fetches real-time atmospheric data based on stitched coordinates.
+ */
+class OpenMeteoProvider extends BaseProvider
 {
-    private Client $client;
+    /** 
+     * Open-Meteo is free for < 10,000 daily calls.
+     * We stay safe with a 1s delay for bulk RAG processing.
+     */
+    protected int $delay = 1000000;
+
+    public function getName(): string { return 'weather_context'; }
+
+    /** 
+     * STITCHING: Requires coordinates from the Postcode anchor 
+     */
+    public function getDependencies(): array { return []; }
+
+    public function getVersion(): string { return '1.1.0'; }
 
     /**
-     * Constructor injection allows the Registry to pass 
-     * a pre-configured Guzzle client during boot.
+     * Fetches weather using coordinates from the master context.
      */
-    public function __construct(?Client $client = null, $verify = false)
-    {
-        $this->client = $client ?? new Client([
-            'verify' => $verify ? $verify : false,
-            'base_uri' => 'https://api.open-meteo.com',
-            'timeout'  => 3.0,
-        ]);
-    }
-
-    public function getName(): string
-    {
-        return 'local_weather_forecast';
-    }
-    
-    public function getDependencies(): array 
-    { 
-        return []; 
-    }
-
     public function fetchData(string $id, array $context = []): array
     {
-        if (!str_contains($id, ',')) return [];
-
+        // $latLong expected as "51.5074,-0.1278"
         [$lat, $lon] = explode(',', $id);
 
+        if (!$lat || !$lon) {
+            // Silently fail if no coordinates are available to keep LLM context clean
+            return [];
+        }
+
+        $url = "https://api.open-meteo.com";
+        
         try {
-            $response = $this->client->get("/v1/forecast", [
+            return $this->safeFetch($url, [
                 'query' => [
-                    'latitude' => trim($lat),
-                    'longitude' => trim($lon),
-                    'current_weather' => 'true',
+                    'latitude' => $lat,
+                    'longitude' => $lon,
+                    'current_weather' => true,
                     'timezone' => 'auto'
                 ]
             ]);
-
-            $data = json_decode($response->getBody()->getContents(), true);
-
-            return [
-                'temperature' => ($data['current_weather']['temperature'] ?? 'N/A') . '°C',
-                'wind_speed'  => ($data['current_weather']['windspeed'] ?? 'N/A') . ' km/h',
-                'time_utc'    => $data['current_weather']['time'] ?? 'Unknown',
-            ];
         } catch (\Exception $e) {
             return [];
         }
     }
 
-    public function getMetadata(): array
+    /**
+     * MetadataTransformer: Converts raw WMO codes into human-readable LLM context.
+     */
+    public function transform(array $data): string
     {
-        return [
-            'source_url'  => 'https://open-meteo.com',
-            'reliability' => 'High',
-            'tier'        => 'Free'
-        ];
+        if (empty($data['current_weather'])) return "";
+
+        $weather = $data['current_weather'];
+        $output = "### 🌦️ LOCAL CLIMATE CONTEXT" . PHP_EOL;
+        $output .= "<!-- Source: Open-Meteo | Real-time atmospheric data -->" . PHP_EOL;
+        $output .= "- **TEMPERATURE**: " . ($weather['temperature'] ?? 'N/A') . "°C" . PHP_EOL;
+        $output .= "- **WIND_SPEED**: " . ($weather['windspeed'] ?? 'N/A') . " km/h" . PHP_EOL;
+        $output .= "- **CONDITION_CODE**: WMO " . ($weather['weathercode'] ?? 'N/A') . PHP_EOL;
+        
+        $output .= "> Info: Weather data is hyper-local to the provided coordinates." . PHP_EOL;
+
+        return $output . "---" . PHP_EOL;
     }
 }
