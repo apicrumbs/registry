@@ -10,12 +10,6 @@ use ApiCrumbs\Core\Contracts\BaseProvider;
  */
 class PostcodeIoProvider extends BaseProvider
 {
-    /** 
-     * Postcodes.io rate limit: 30 req/sec. 
-     * Setting delay to 34,000 microseconds (~34ms) to be safe.
-     */
-    protected int $delay = 34000;
-
     public function getName(): string { return 'postcode_io_context'; }
 
     public function getDependencies(): array { return []; }

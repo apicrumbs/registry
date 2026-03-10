@@ -10,12 +10,6 @@ use ApiCrumbs\Core\Contracts\BaseProvider;
  */
 class OpenMeteoProvider extends BaseProvider
 {
-    /** 
-     * Open-Meteo is free for < 10,000 daily calls.
-     * We stay safe with a 1s delay for bulk RAG processing.
-     */
-    protected int $delay = 1000000;
-
     public function getName(): string { return 'open_meteo_context'; }
 
     /** 
