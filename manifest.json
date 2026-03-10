@@ -13,7 +13,8 @@
       "url": "https://open-meteo.com",
       "example_id": "51.5074,-0.1278",
       "install_path": "src/Providers/Weather/OpenMeteoProvider.php",
-      "version": "1.0.1"
+      "version": "1.0.1",
+      "class": "ApiCrumbs\\Providers\\Weather\\OpenMeteoProvider"
     },
     {
       "id": "geo/postcodes-io",
@@ -26,7 +27,8 @@
       "url": "https://postcodes.io",
       "example_id": "SW1A 2AA",
       "install_path": "src/Providers/Geo/PostcodeIoProvider.php",
-      "version": "1.0.1"
+      "version": "1.0.1",
+      "class": "ApiCrumbs\\Providers\\Geo\\PostcodeIoProvider"      
     }   
   ]
 }
