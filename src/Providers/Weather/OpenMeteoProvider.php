@@ -12,9 +12,6 @@ class OpenMeteoProvider extends BaseProvider
 {
     public function getName(): string { return 'open_meteo_context'; }
 
-    /** 
-     * STITCHING: Requires coordinates from the Postcode anchor 
-     */
     public function getDependencies(): array { return []; }
 
     public function getVersion(): string { return '1.1.0'; }

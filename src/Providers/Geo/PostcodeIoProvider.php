@@ -14,7 +14,7 @@ class PostcodeIoProvider extends BaseProvider
 
     public function getDependencies(): array { return []; }
 
-    public function getVersion(): string { return '1.2.0'; }
+    public function getVersion(): string { return '1.3.0'; }
 
     /**
      * Fetches raw postcode data from the open API.
@@ -23,10 +23,10 @@ class PostcodeIoProvider extends BaseProvider
     {
         // Canonicalize the ID for the API
         $cleanId = str_replace(' ', '', strtoupper($id));
-        
-        // FIX: Ensure the /postcodes/ endpoint is included
-        $url = "https://api.postcodes.io" . urlencode($cleanId);
+        $cleanId = str_replace('+', '', strtoupper($cleanId));
 
+        $url = "https://api.postcodes.io/postcodes/" . urlencode($cleanId);
+        
         try {
             $response = $this->safeFetch($url);
             return $response['result'] ?? [];

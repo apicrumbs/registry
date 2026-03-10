@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "last_updated": "2026-03-05",
   "providers": [
-    {
+    "open_meteo_context" {
       "id": "weather/open-meteo",
       "name": "Open-Meteo",
       "category": "Weather",
@@ -16,7 +16,7 @@
       "version": "1.0.1",
       "class": "ApiCrumbs\\Providers\\Weather\\OpenMeteoProvider"
     },
-    {
+    "postcode_io_context" {
       "id": "geo/postcodes-io",
       "name": "Postcodes.io",
       "category": "Geo",
