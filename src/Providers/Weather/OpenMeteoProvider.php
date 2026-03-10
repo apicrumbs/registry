@@ -14,7 +14,7 @@ class OpenMeteoProvider extends BaseProvider
 
     public function getDependencies(): array { return []; }
 
-    public function getVersion(): string { return '1.1.0'; }
+    public function getVersion(): string { return '1.0.3'; }
 
     /**
      * Fetches weather using coordinates from the master context.
@@ -29,7 +29,7 @@ class OpenMeteoProvider extends BaseProvider
             return [];
         }
 
-        $url = "https://api.open-meteo.com";
+        $url = "https://api.open-meteo.com/v1/forecast";
         
         try {
             return $this->safeFetch($url, [
