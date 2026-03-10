@@ -14,7 +14,8 @@
       "example_id": "51.5074,-0.1278",
       "download_url": "https://raw.githubusercontent.com/apicrumbs/registry/refs/heads/main/src/Providers/Weather/OpenMeteoProvider.php",
       "version": "1.0.1",
-      "class": "ApiCrumbs\\Providers\\Weather\\OpenMeteoProvider"
+      "class": "ApiCrumbs\\Providers\\Weather\\OpenMeteoProvider",
+      "install_path": "src/Providers/Weather/OpenMeteoProvider.php"
     },
     {
       "id": "geo/postcodes-io",
@@ -28,7 +29,8 @@
       "example_id": "SW1A 2AA",
       "download_url": "https://raw.githubusercontent.com/apicrumbs/registry/refs/heads/main/src/Providers/Geo/PostcodeIoProvider.php",
       "version": "1.0.1",
-      "class": "ApiCrumbs\\Providers\\Geo\\PostcodeIoProvider"      
+      "class": "ApiCrumbs\\Providers\\Geo\\PostcodeIoProvider",
+      "install_path": "src/Providers/Geo/PostcodeIoProvider.php"
     }   
   ]
 }
