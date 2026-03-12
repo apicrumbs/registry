@@ -47,5 +47,30 @@
       "class": "ApiCrumbs\\Providers\\Pro\\PostcodeIoProProvider",
       "install_path": "src/Providers/Pro/PostcodeIoProProvider.php"
     }      
+  ],
+  "agents": [
+    {
+      "id": "local_guide",
+        "name": "Local Guide Persona",
+        "version": "1.0.0",
+        "tier": "free",
+        "class": "ApiCrumbs\\Agents\\Geo\\LocalGuideAgent",
+        "install_path": "src/Agents/Geo/LocalGuideAgent.php",
+        "dependencies": ["weather/open-meteo", "geo/postcodes-io"],
+        "example_id": "suggest_weekend_trip",
+        "description": "Combines weather and geo data for travel advice."
+    },
+    {
+      "id": "fiscal_auditor",
+      "name": "Pro Fiscal Auditor",
+      "version": "1.5.3",
+      "tier": "pro",
+      "class": "ApiCrumbs\\Agents\\Fiscal\\FiscalAuditorAgent",
+      "install_path": "src/Agents/Fiscal/FiscalAuditorAgent.php",
+      "dependencies": ["hmrc_vat", "companies_house_pro"],
+      "example_id": "verify_company_tax",
+      "description": "Verifies company tax fiscal auditor.",
+      "requires_key": "GITHUB_SPONSOR_TOKEN"
+    }
   ]
 }
