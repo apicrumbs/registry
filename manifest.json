@@ -74,27 +74,26 @@
     }
   ],
   "drivers": [
-      {
-        "id": "ollama",
-        "name": "Ollama (Local)",
-        "version": "1.1.0",
-        "tier": "free",
-        "class": "ApiCrumbs\\Drivers\\Free\\OllamaDriver",
-        "install_path": "src/Drivers/Free/OllamaDriver.php",
-        "example_id": "llama3",
-        "description": "Run LLMs locally on your own hardware."
-      },
-      {
-        "id": "hardened_openai",
-        "name": "Enterprise Hardened Driver",
-        "version": "2.0.0",
-        "tier": "pro",
-        "class": "ApiCrumbs\\Drivers\\Pro\\HardenedOpenAiDriver",
-        "install_path": "src/Drivers/Pro/HardenedOpenAiDriver.php",
-        "example_id": "gpt-4-turbo",
-        "description": "Run Enterprise Hardened Driver OpenAI.",
-        "requires_key": "GITHUB_SPONSOR_TOKEN"
-      }
-    ]
-  }
+    {
+      "id": "ollama",
+      "name": "Ollama (Local)",
+      "version": "1.1.0",
+      "tier": "free",
+      "class": "ApiCrumbs\\Drivers\\Free\\OllamaDriver",
+      "install_path": "src/Drivers/Free/OllamaDriver.php",
+      "example_id": "llama3",
+      "description": "Run LLMs locally on your own hardware."
+    },
+    {
+      "id": "hardened_openai",
+      "name": "Enterprise Hardened Driver",
+      "version": "2.0.0",
+      "tier": "pro",
+      "class": "ApiCrumbs\\Drivers\\Pro\\HardenedOpenAiDriver",
+      "install_path": "src/Drivers/Pro/HardenedOpenAiDriver.php",
+      "example_id": "gpt-4-turbo",
+      "description": "Run Enterprise Hardened Driver OpenAI.",
+      "requires_key": "GITHUB_SPONSOR_TOKEN"
+    }
+  ]  
 }
